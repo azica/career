@@ -201,7 +201,7 @@ $('.close__icon').on('click', function(){
 })
 
 
-$('.has-dropdown a').on('click', function(e){
-  e.preventDefault();
+$('.has-dropdown li').on('click', function(e){
+  
   $('.has-dropdown ul').addClass('dropdown-show');
 })
