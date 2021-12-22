@@ -1,3 +1,5 @@
+// Wow slider 
+
 var wow = new WOW(
     {
       boxClass:     'wow',      // animated element css class (default is wow)
@@ -19,8 +21,7 @@ var wow = new WOW(
   function myFunction() {
       window.onscroll = function() {myFunction()};
       var header = document.querySelector('.header');
-      var sticky = header.offsetTop;
-      if (window.pageYOffset > sticky) {
+      if (window.pageYOffset > 150) {
           header.classList.add("header-sticky");
       } else {
           header.classList.remove("header-sticky");
@@ -32,10 +33,14 @@ var wow = new WOW(
   $('.menu__icon').click(function(){
       $('.menu__list').toggleClass('menu__list-open');
       $(this).toggleClass('menu__icon-close');
+      $('body').toggleClass("overflow");
   })
+  // Brands slider 
   var swiper = new Swiper(".brands__slider", {
     spaceBetween: 0,
+    loop: true,
     autoplay: true,
+    speed: 2000,
     breakpoints: {
       320: {
         slidesPerView: 2,
@@ -51,28 +56,53 @@ var wow = new WOW(
       },
     }
   });
+  var values__slider = new Swiper(".values__slider", {
+    spaceBetween: 0,
+    loop: true,
+    autoplay: true,
+    speed: 2000,
+    navigation: {
+      nextEl: '.swiper__next',
+      prevEl: '.swiper__prev',
+    },
+    breakpoints: {
+      320: {
+        slidesPerView: 1,
+      },
+      480: {
+        slidesPerView: 2,
+      },
+      1050: {
+        slidesPerView: 3,
+      },
+    }
+  });
   
+// Add more vacancies
+let addMore = document.querySelector('#add-load');
+let vacancyList = document.querySelectorAll('.vacancies__list li');
+let hiddenList = document.getElementsByClassName('hidden');
+
+let vacList = Array.from(vacancyList);
+let hideList = vacList.slice(4);
+
+hideList.forEach(el => {
+  el.classList.add('hidden');
+})
+addMore.addEventListener('click', function(el) {
+  let rmClass = Array.from(hiddenList);
+  rmClass.forEach(function(el){
+    el.classList.remove('hidden');
+    let style = {
+      visibility: 'visible',
+      transition: 'all .5s ease-in',
+    }
+    el.style = style;
+  });
   
+});
   
-  $('.gallery__img').click( function() {
-  
-    var id = $(this).data('id');
-    $('.video-modal[data-id="modal' + id + '"]').fadeIn(2000);
-   let bb =   $('.video-modal[data-id="modal' + id + '"]').children();
-   bb[0].play();
-  })
-  
-  $('.close__icon').click( function() {
-    var id = $('.gallery__img').data('id');
-    $('.video-modal').fadeOut();
-    var vid = $("#video01, #video02, #video03");
-    vid.each(function (k, v) {
-      var mediaVideo = this;
-      v.pause();
-   });
-  
-  })
-  
+
   $('.apply-click').click(function(){
     $('.vacancy__modal').addClass('vacancy__modal-show');
     })
@@ -81,7 +111,7 @@ var wow = new WOW(
     $('.vacancy__modal').removeClass('vacancy__modal-show');
     })
   
-  
+  // Submit form
   const form = document.querySelector('#vacancy-form');
   form.addEventListener('submit', formSend);
   
@@ -150,4 +180,28 @@ var wow = new WOW(
       return !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(input.value);
   }
   
-  
+// Names
+let names = document.getElementsByClassName('team__name');
+names = Array.from(names);
+ names.forEach(function(el){
+  el.innerHTML = el.innerHTML.split('').map((char, i)=> 
+  `<span style="transform: rotate(${i *8}deg)">${char}</span>`).join("");
+ })
+
+//  Modal and video
+$('.gallery__img .icon__video-arrow').on('click', function(){
+  $(this).next().addClass('_active');
+  let video = $(this).next().find("video");
+   video.get(0).play();
+   console.log($(this).next());
+});
+$('.close__icon').on('click', function(){
+  $('.video-modal').removeClass('_active');
+  $('video').trigger('pause');
+})
+
+
+$('.has-dropdown a').on('click', function(e){
+  e.preventDefault();
+  $('.has-dropdown ul').addClass('dropdown-show');
+})
