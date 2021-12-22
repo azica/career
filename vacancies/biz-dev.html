@@ -92,6 +92,36 @@
         </div>
       </div>
     </main>
+    <div class="vacancy__modal"> 
+      <form class="form" id="vacancy-form" action=""><span class="form-close"><img src="./img/close.svg"></span>
+        <div class="form__row"> 
+          <div class="form__col6"> 
+            <label for="name">First Name</label>
+            <input class="form__input _req" type="name" id="name" placeholder="enter">
+          </div>
+          <div class="form__col6"> 
+            <label for="lastName">Last Name</label>
+            <input class="form__input _req" type="last-name" id="lastName" placeholder="enter">
+          </div>
+          <div class="form__col6"> 
+            <label for="phone">Contact Phone</label>
+            <input class="form__input _req" type="tel" id="phone" placeholder="+1" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value="+1">
+          </div>
+          <div class="form__col6"> 
+            <label for="email">Email</label>
+            <input class="form__input _email _req" type="email" id="email" placeholder="example@gmail.com">
+          </div>
+        </div>
+        <div class="form__col">
+          <label for="Message">Position you apply for</label>
+          <textarea type="Message" placeholder="enter"></textarea>
+          <div class="form__file">
+            <input class="_req" type="file" id="fileToUpload"><span>upload your cv </span>
+          </div>
+          <button class="apply__link">apply </button>
+        </div>
+      </form>
+    </div>
     <footer class="footer">
       <div class="container">
         <div class="footer__inner"> 
